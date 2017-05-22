@@ -1,0 +1,24 @@
+{
+  "name": "workflow",
+  "version": "1.0.0",
+  "description": "Moder website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MGSTUDIOLT/siteWorkFlow.git"
+  },
+  "keywords": [
+    "SASS",
+    "NPM",
+    "GULP"
+  ],
+  "author": "MG Studio",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MGSTUDIOLT/siteWorkFlow/issues"
+  },
+  "homepage": "https://github.com/MGSTUDIOLT/siteWorkFlow#readme"
+}
