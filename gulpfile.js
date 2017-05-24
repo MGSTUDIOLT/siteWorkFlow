@@ -16,7 +16,8 @@ var SOURCEPATHS = {
 var APPPATH = {
     root : 'app/',
     css : 'app/css',
-    js : 'app/js'
+    js : 'app/js',
+    fonts : 'app/fonts'
 }
 
 // ISVALOM FAILUS KURIE BUVO PASALINTI IS SRC
@@ -46,6 +47,11 @@ gulp.task('sass', function() {
         .pipe(gulp.dest(APPPATH.css));
 });
 
+gulp.task('moveFonts', function() {
+    gulp.src('./node_modules/bootstrap/dist/fonts/*.{eot,svg,ttf,woff,woff2}')
+        .pipe(gulp.dest(APPPATH.fonts));
+});
+
 // KOPIJUOJAM JS
 gulp.task('scripts', ['clean-scripts'], function() {
     gulp.src(SOURCEPATHS.jsSource)
@@ -70,7 +76,7 @@ gulp.task('serve', ['sass'], function() {
 });
 
 // watch kad stebetu scss ir padarytu kai kazka pakeiciam
-gulp.task('watch', ['serve', 'sass', 'copy', 'clean-html', 'clean-scripts', 'scripts'], function() {
+gulp.task('watch', ['serve', 'sass', 'copy', 'clean-html', 'clean-scripts', 'scripts', 'moveFonts'], function() {
     gulp.watch([SOURCEPATHS.sassSource], ['sass']);
     gulp.watch([SOURCEPATHS.htmlSource], ['copy']);
     gulp.watch([SOURCEPATHS.jsSource], ['scripts']);
