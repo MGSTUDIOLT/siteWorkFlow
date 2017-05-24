@@ -1,0 +1,15 @@
+{
+	"gallery": [
+    {"destiny":"London Eye",
+     "image": "london_eye.png"
+    },
+    {"destiny":"Tower Bridge",
+     "image": "tower_bridge.png"
+    },
+    {"destiny":"Westminster Abbey",
+     "image": "westminster_abbey.png"
+    },
+    {"destiny":"St. Paul Cathedral",
+     "image": "cathedrale.png"
+    }
+]}
