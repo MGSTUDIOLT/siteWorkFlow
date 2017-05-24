@@ -1,4 +1,5 @@
 body {
-  background-color: "#000";
-  border: "5px" solid red;
+  background-color: #fff;
+  border: 100px solid red;
+  font-size: 15px;
 }

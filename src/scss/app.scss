@@ -1,7 +1,8 @@
-$black: '#000';
-$radius: '5px';
+$black: #fff;
+$radius: 100px;
 
 body {
     background-color: $black;
     border: $radius solid red;
+    font-size: 15px;
 }
