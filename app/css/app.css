@@ -2,4 +2,6 @@ body {
   background-color: #fff;
   border: 100px solid red;
   font-size: 15px;
+  -webkit-transition: ease all .3s;
+  transition: ease all .3s;
 }
