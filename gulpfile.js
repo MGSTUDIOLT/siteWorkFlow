@@ -3,10 +3,12 @@ var sass = require('gulp-sass');
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 var autoprefixer = require('gulp-autoprefixer');
+var clean = require('gulp-clean');
 
 var SOURCEPATHS = {
     sassSource : 'src/scss/*.scss',
-    htmlSource : 'src/*.html'
+    htmlSource : 'src/*.html',
+    jsSource : 'src/js/**'
 }
 var APPPATH = {
     root : 'app/',
@@ -14,18 +16,35 @@ var APPPATH = {
     js : 'app/js'
 }
 
+// ISVALOM FAILUS KURIE BUVO PASALINTI IS SRC
+gulp.task('clean-html', function() {
+    return gulp.src(APPPATH.root + '/*.html', { read: false, force: true })
+        .pipe(clean());
+});
+
+gulp.task('clean-scripts', function() {
+    return gulp.src(APPPATH.js + '/*.js', { read: false, force: true })
+        .pipe(clean());
+});
+
 // SASS COMPILIATORIUS
 gulp.task('sass', function() {
     return gulp.src(SOURCEPATHS.sassSource)
         .pipe(autoprefixer()) // compressed
         .pipe(sass({ outputStyle: 'expanded' }).on('error', sass.logError))
-        .pipe(gulp.dest(APPPATH.css))
+        .pipe(gulp.dest(APPPATH.css));
 });
 
-// COPY HTML FILE TO APP
-gulp.task('copy', function() {
+// KOPIJUOJAM JS
+gulp.task('scripts', ['clean-scripts'], function() {
+    gulp.src(SOURCEPATHS.jsSource)
+        .pipe(gulp.dest(APPPATH.js));
+});
+
+// COPY HTML FILE TO APP (Bus naudojamos dependencies, include kaip php, compress del to automatiskai bus sukuriami patobulinti failai app folder)
+gulp.task('copy', ['clean-html'], function() {
     gulp.src(SOURCEPATHS.htmlSource) 
-        .pipe(gulp.dest(APPPATH.root))
+        .pipe(gulp.dest(APPPATH.root));
 });
 
 // AUTOMATISKAI ATNAUJINS NARSYKLES LANGA
@@ -38,9 +57,10 @@ gulp.task('serve', ['sass'], function() {
 });
 
 // watch kad stebetu scss ir padarytu kai kazka pakeiciam
-gulp.task('watch', ['serve', 'sass', 'copy'], function() {
+gulp.task('watch', ['serve', 'sass', 'copy', 'clean-html', 'clean-scripts', 'scripts'], function() {
     gulp.watch([SOURCEPATHS.sassSource], ['sass']);
     gulp.watch([SOURCEPATHS.htmlSource], ['copy']);
+    gulp.watch([SOURCEPATHS.jsSource], ['scripts']);
 });
 
 gulp.task('default', ['watch']);
